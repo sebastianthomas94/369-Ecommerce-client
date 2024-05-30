@@ -2,6 +2,7 @@
   "name": "e-commerce",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://sebastianthomas94.github.io/369-Ecommerce-client",
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
@@ -19,7 +20,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -45,6 +48,7 @@
     "react-helmet": "^6.1.0",
     "react-otp-input": "^3.1.1",
     "react-toastify": "^10.0.5",
-    "tailwindcss": "^3.4.3"
+    "tailwindcss": "^3.4.3",
+    "gh-pages": "^3.1.0"
   }
 }
