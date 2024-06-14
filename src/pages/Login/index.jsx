@@ -1,13 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import { Img, Text, Heading, Button, Input } from "../../components";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { useNavigate } from "react-router-dom";
+import { postLogin } from "../../utils/api/login";
+import { toast } from "react-toastify";
 
 export default function Login() {
-
+  const [phone, setPhone] = useState("");
   const navigate = useNavigate();
+
+  const handleSendOTP = async () => {
+    const response =  postLogin({ phone });
+    localStorage.setItem("phone", phone);
+    if (response?.success) {
+      navigate("/otp");
+      return;
+    }
+    toast.dark(`OTP was not send`);
+    return;
+  };
+
   return (
     <>
       <Helmet>
@@ -37,6 +51,8 @@ export default function Login() {
                     </div>
                     <Input
                       size="xs"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
                       shape="round"
                       type="tel"
                       name="Phone Field"
@@ -50,7 +66,7 @@ export default function Login() {
                     size="md"
                     shape="round"
                     className="w-full font-medium py-2 rounded-md cursor-pointer"
-                    onClick={()=>navigate('/otp')}
+                    onClick={handleSendOTP}
                   >
                     Send OTP
                   </Button>
@@ -73,7 +89,7 @@ export default function Login() {
           </div>
         </div>
         {/* footer bottom section */}
-        <Footer/>
+        <Footer />
       </div>
     </>
   );
